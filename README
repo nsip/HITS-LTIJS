@@ -1,0 +1,35 @@
+Features:
+
+	* URL includes base information
+	* Consider direct information, or better MySQL get Vendor App data OR API to get App/Vendor data
+	* LAUNCH
+	* Generate a SIF Login and Token
+
+	* CALL Back URLs
+
+
+Stephen Doc - for 
+
+	Custom TC Profile URL
+
+Should Be
+	LTI 2
+		
+
+
+SIF CLIENT LIBRARY
+
+	* Use SIF Client library to connect into SIF itself
+
+	
+
+Configuration
+
+	* Endpoint, Key, Secret - is there anything else we need now
+	* o
+
+
+DOCUMENTS:
+	* NSIP Projects / Current / LTI SIF / SIF - IMS LTI Consumer vx
+	* ... / LTI _SIF_Notes_29Oct14.pdf
+	* 
