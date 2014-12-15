@@ -1,12 +1,11 @@
+// ======================================================================
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var routes = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
 
@@ -22,8 +21,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// ======================================================================
+
+// Useful home page
+var routes = require('./routes/index');
 app.use('/', routes);
+
+// Users - TODO change to /launch ? - LTI Launching services - what the user start with
+var users = require('./routes/users');
 app.use('/users', users);
+
+// Service - the callback from the LTI Tool Provider
+var users = require('./routes/service');
+app.use('/service', users);
+
+// ======================================================================
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -55,6 +67,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
 
 module.exports = app;
