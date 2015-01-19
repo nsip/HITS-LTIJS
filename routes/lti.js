@@ -45,6 +45,20 @@ router.get('/launch', function(req, res) {
 	// res.send('respond with a resource');
 });
 
-// router.get('/', function(req, res) {
+router.get('/show', function(req, res) {
+	req.getConnection(function(err, dbh) {
+		if (err) throw err;
+		dbh.query(
+			'SELECT * FROM vendor',
+			function(err, results) {
+				if (err) res.json(err);
+				if (results.length > 0)
+					res.json(results);
+				else 
+					res.json('No data found');
+			}
+		);
+	});
+});
 
 module.exports = router;
