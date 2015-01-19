@@ -1,3 +1,15 @@
+TODO:
+
+	* LTI 1 Launch test
+	* Add call back URL with dummy JSON data from doc
+	* Add callback (LTI / Extension service) data to launch
+	* Add dummy user to launch
+	* Write reusable SIF Javascript library
+	* Integrate SIF library to generate a SIF Token
+	* Return token via callback
+	* Upgrade to LTI2 where required
+	* Test with other tool providers
+	
 Features:
 
 	* URL includes base information

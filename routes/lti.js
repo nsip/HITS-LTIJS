@@ -4,7 +4,7 @@ var router = express.Router();
 var lti = require('lti');
 
 /* GET users listing. */
-router.get('/', function(req, res) {
+router.get('/launch', function(req, res) {
 
 	// consumer = new lti.ToolConsumer('https://example.com/path/to/producer', 'key', 'secret')
 	consumer = new lti.ToolConsumer('http://ltiapps.net/test/tp.php', 'key', 'secret')
@@ -44,5 +44,7 @@ router.get('/', function(req, res) {
 	
 	// res.send('respond with a resource');
 });
+
+// router.get('/', function(req, res) {
 
 module.exports = router;

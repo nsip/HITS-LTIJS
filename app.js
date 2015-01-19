@@ -7,6 +7,28 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var mysql        = require('mysql');
+var dbh          = require('express-myconnection');
+var session      = require('express-session')
+var nconf        = require('nconf');
+
+// Configuration - Default/Local config, override by central
+nconf.argv()
+	.env()
+	.file('central', '/etc/hits.json')
+	.file('home', process.env.HOME + '/.hits.json')
+	.file('local', 'config.json')
+	.defaults({
+		database: {
+			host: 'localhost',
+			user: 'ubuntu',
+			password: '',
+			port: 3306,
+			database: 'c_config_api'
+		}
+	});
+console.log(nconf.get('database'));
+
 var app = express();
 
 // view engine setup
@@ -15,6 +37,7 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(dbh(mysql, nconf.get('database'), 'single'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,12 +51,11 @@ var routes = require('./routes/index');
 app.use('/', routes);
 
 // Users - TODO change to /launch ? - LTI Launching services - what the user start with
-var users = require('./routes/users');
-app.use('/users', users);
+var lti = require('./routes/lti');
+app.use('/lti', lti);
 
-// Service - the callback from the LTI Tool Provider
-var users = require('./routes/service');
-app.use('/service', users);
+var service = require('./routes/service');
+app.use('/service', service);
 
 // ======================================================================
 
