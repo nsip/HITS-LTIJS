@@ -20,11 +20,6 @@ nconf.argv()
 	.file('local', 'config.json')
 	.defaults({
 		database: {
-			host: 'localhost',
-			user: 'ubuntu',
-			password: '',
-			port: 3306,
-			database: 'c_config_api'
 		}
 	});
 console.log(nconf.get('database'));

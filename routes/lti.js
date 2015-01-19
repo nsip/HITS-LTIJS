@@ -45,15 +45,36 @@ router.get('/launch', function(req, res) {
 	// res.send('respond with a resource');
 });
 
+// Little function to show all templates
 router.get('/show', function(req, res) {
 	req.getConnection(function(err, dbh) {
 		if (err) throw err;
 		dbh.query(
-			'SELECT * FROM vendor',
+			// 'SELECT * FROM vendor',
+			'SELECT * FROM hits_sif3_infra.SIF3_APP_TEMPLATE',
 			function(err, results) {
 				if (err) res.json(err);
 				if (results.length > 0)
 					res.json(results);
+				else 
+					res.json('No data found');
+			}
+		);
+	});
+});
+
+router.get('/show/:id', function(req, res) {
+	var id = req.params.id;
+	req.getConnection(function(err, dbh) {
+		if (err) throw err;
+		dbh.query(
+			// 'SELECT * FROM vendor',
+			'SELECT * FROM hits_sif3_infra.SIF3_APP_TEMPLATE WHERE USER_TOKEN=?',
+			[id],
+			function(err, results) {
+				if (err) res.json(err);
+				if (results.length > 0)
+					res.json(results[0]);
 				else 
 					res.json('No data found');
 			}
